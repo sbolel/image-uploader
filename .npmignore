@@ -1,0 +1,7 @@
+**/.DS_Store
+.es*
+.git
+.gitignore
+bower.json
+Gruntfile.js
+node_modules
