@@ -35,13 +35,12 @@ Or with the Amazon SDK included:
 
     <script src="lib/image-upload.bundle.min.js"></script>
 
-#### Upload an image from a controller
+#### Upload an image
 
-const imageUpload = new ImageUpload();
-imageUpload.push(file, (data) => {
-  console.log('File uploaded Successfully', $scope.file, data);
-  $scope.uploadUri = data.url;
-});
+    const imageUploader = new ImageUploader();
+    imageUploader.push(file, (data) => {
+      console.log('File uploaded Successfully', file, data);
+    });
 
 ## Configuring AWS S3
 
