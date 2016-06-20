@@ -1,8 +1,13 @@
 # Image Uploader
 
+[![NPM version][npm-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
 
+[npm-image]: https://img.shields.io/npm/v/image-uploader.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/image-uploader
+[npm-downloads-image]: https://img.shields.io/npm/dm/image-uploader.svg?style=flat-square
 [daviddm-image]: https://img.shields.io/david/sbolel/image-uploader.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/sbolel/image-uploader
 [license-image]: https://img.shields.io/npm/l/image-uploader.svg?style=flat-square
@@ -14,11 +19,19 @@ An open source plugin for uploading image files to an S3 bucket.
 
 ## Getting Started
 
+Install `image-uploader` via npm:
+    
+    npm install --save image-uploader
+
+Or via Bower:
+    
+    bower install --save s3-image-uploader
+
 Include image-upload.bundle.min.js in your app:
 
     <script src="lib/image-upload.min.js"></script>
 
-Or, to use this with the Amazon SDK included:
+Or with the Amazon SDK included:
 
     <script src="lib/image-upload.bundle.min.js"></script>
 
