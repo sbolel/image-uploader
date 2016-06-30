@@ -1,9 +1,7 @@
-'use strict';
+'use strict'
 
-module.exports = function(grunt) {
-
+module.exports = (grunt) => {
   grunt.initConfig({
-
     pkg: grunt.file.readJSON('package.json'),
 
     uglify: {
@@ -26,9 +24,9 @@ module.exports = function(grunt) {
         }
       }
     }
-  });
+  })
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('build', ['uglify']);
-  grunt.registerTask('default', ['build']);
-};
+  grunt.loadNpmTasks('grunt-contrib-uglify')
+  grunt.registerTask('build', ['uglify'])
+  grunt.registerTask('default', ['build'])
+}

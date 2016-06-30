@@ -4,6 +4,7 @@
 [![NPM downloads][npm-downloads-image]][npm-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
+[![js-standard][standard-image]][standard-url]
 
 [npm-image]: https://img.shields.io/npm/v/image-uploader.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/image-uploader
@@ -12,6 +13,8 @@
 [daviddm-url]: https://david-dm.org/sbolel/image-uploader
 [license-image]: https://img.shields.io/npm/l/image-uploader.svg?style=flat-square
 [license-url]: https://github.com/sbolel/image-uploader/blob/master/LICENSE
+[standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg
+[standard-url]: http://standardjs.com/
 
 An open source plugin for uploading image files to an S3 bucket.
 

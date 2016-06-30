@@ -1,22 +1,21 @@
 {
   "name": "image-uploader",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "JavaScript Image Uploader Library for use with Amazon S3",
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Sinan Bolel",
-      "email": "sinanbolel@gmail.com",
-      "url": "https://sinanbolel.com"
-    }
-  ],
+  "authors": {
+    "name": "Sinan Bolel",
+    "email": "sinanbolel@gmail.com",
+    "url": "https://sinanbolel.com"
+  },
   "engines": {
-    "node": ">=5.7.0",
-    "npm": ">=3.9.5"
+    "node": ">=6.2.2",
+    "npm": ">=3.10.3"
   },
   "main": "src/image-uploader.js",
   "scripts": {
-    "postinstall": "grunt"
+    "postinstall": "grunt",
+    "test": "standard"
   },
   "repository": {
     "type": "git",
@@ -36,6 +35,7 @@
     "aws-sdk": "^2.4.0",
     "grunt": "^1.0.1",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-uglify": "^1.0.1"
+    "grunt-contrib-uglify": "^1.0.1",
+    "standard": "^7.1.2"
   }
 }
