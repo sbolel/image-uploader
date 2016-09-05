@@ -1,19 +1,19 @@
 (function (AWS) {
   'use strict'
-  const sizeLimit = 10485760   // 10MB in Bytes
-  const sizeLabel = Math.round(sizeLimit / 1024 / 1024) + 'MB'   // Bytes To MB string
+  var sizeLimit = 10485760   // 10MB in Bytes
+  var sizeLabel = Math.round(sizeLimit / 1024 / 1024) + 'MB'   // Bytes To MB string
 
   // Generate a unique string
-  const uniqueString = function () {
+  var uniqueString = function () {
     var text = ''
-    const regx = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    var regx = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     for (var idx = 0; idx < 8; idx++) {
       text = text + regx.charAt(Math.floor(Math.random() * regx.length))
     }
     return text
   }
 
-  const defaultConfig = {
+  var defaultConfig = {
     accessKeyId: 'AKIAJDDLMBIFFIUWYCEA',
     bucket: {},
     bucketName: 'com.thinkcrazy.ionicimageupload',
@@ -27,7 +27,7 @@
 
   // ImageUploader class
   function ImageUploader (inputConfig) {
-    const config = Object.assign({}, defaultConfig, inputConfig)
+    var config = Object.assign({}, defaultConfig, inputConfig)
     AWS.config.update({
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,
@@ -74,12 +74,12 @@
       }, 100)
     },
     push: function (file) {
-      const self = this
+      var self = this
       if (!this.validateFile(file)) {
         throw new Error('Missing file.')
       }
-      const filename = encodeURI(uniqueString() + '-' + file.name)
-      const params = {
+      var filename = encodeURI(uniqueString() + '-' + file.name)
+      var params = {
         ACL: 'public-read',
         Body: file,
         Bucket: this._bucketName,
