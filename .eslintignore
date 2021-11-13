@@ -1,0 +1,9 @@
+# temporary directories
+**/.cache
+**/.temp
+
+# build directories
+**/dist
+
+# node.js
+**/node_modules

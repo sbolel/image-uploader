@@ -1,0 +1,16 @@
+# Environment files
+**/.env
+**/.env-example
+
+# Temporary directories
+**/.cache
+**/.temp
+
+# Build directories
+**/dist
+
+# Node.js
+**/node_modules
+
+# Resources directory
+resources/
