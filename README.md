@@ -18,7 +18,7 @@
 
 An open source plugin for uploading image files to an S3 bucket.
 
-- **Demo**: https://ionimg.firebaseapp.com/
+- **Demo**: https://sbolel.github.io/image-uploader/
 - Repository: https://github.com/sbolel/image-uploader
 
 ## Getting Started
