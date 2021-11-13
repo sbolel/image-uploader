@@ -1,0 +1,20 @@
+# EditorConfig: https://editorconfig.org/
+
+# Top-Most Editorconfig File
+root = true
+
+# Default Settings for All Files
+[*]
+# Encoding
+charset = utf-8
+end_of_line = lf
+# Transformation
+insert_final_newline = true
+trim_trailing_whitespace = true
+# Indentation
+indent_size = 2
+indent_style = space
+
+# Settings Specific to Python Files
+[*.py]
+indent_size = 4
