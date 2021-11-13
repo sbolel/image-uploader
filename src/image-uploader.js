@@ -1,112 +1,118 @@
 ;(function (AWS) {
   'use strict'
-  var sizeLimit = 10485760 // 10MB in Bytes
-  var sizeLabel = Math.round(sizeLimit / 1024 / 1024) + 'MB' // Bytes To MB string
+
+  const name = 'com.thinkcrazy.ionicimageupload'
+  const url = 'https://s3.amazonaws.com/com.thinkcrazy.ionicimageupload/'
+  const region = 'us-east-1'
+  const accessKeyId = 'AKIAJDDLMBIFFIUWYCEA'
+  const secretAccessKey = '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'
+  const ServerSideEncryption = 'AES256'
+
+  const sizeLimit = 10485760  // 10MB in Bytes
+  const sizeLabel = `${Math.round(sizeLimit/1024/1024)}MB`  // Bytes To MB string
 
   // Generate a unique string
-  var uniqueString = function () {
-    var text = ''
-    var regx = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    for (var idx = 0; idx < 8; idx++) {
-      text = text + regx.charAt(Math.floor(Math.random() * regx.length))
+  const uniqueString = () => {
+    const randomString = Math.random().toString(36).substring(2, 10)
+    const dateString = Date.now().toString(36)
+    return `${dateString}${randomString}`
+  }
+
+  function ImageUploader(inputConfig = {}) {
+    const config = {
+      accessKeyId,
+      name,
+      url,
+      region,
+      secretAccessKey,
+      sizeLimit,
+      ...inputConfig
     }
-    return text
-  }
 
-  var defaultConfig = {
-    accessKeyId: 'AKIAJDDLMBIFFIUWYCEA',
-    bucket: {},
-    bucketName: 'com.thinkcrazy.ionicimageupload',
-    bucketUrl: 'https://s3.amazonaws.com/com.thinkcrazy.ionicimageupload/',
-    file: {},
-    region: 'us-east-1',
-    secretAccessKey: 'gCF19auerZBOx9IvpPpKAlCJYbD0yUo+bLyNB+wA',
-    sizeLimit: sizeLimit,
-    uploadProgress: 0,
-  }
+    const {
+      accessKeyId,
+      name,
+      url,
+      region,
+      secretAccessKey
+    } = config
 
-  // ImageUploader class
-  function ImageUploader(inputConfig) {
-    var config = Object.assign({}, defaultConfig, inputConfig)
-    AWS.config.update({
-      accessKeyId: config.accessKeyId,
-      secretAccessKey: config.secretAccessKey,
-      region: config.region,
-    })
-    this._err = {}
-    this._accessKeyId = config.accessKeyId
-    this._secretAccessKey = config.secretAccessKey
-    this._region = config.region
-    this._bucketName = config.bucketName
-    this._bucketUrl = config.bucketUrl
-    this._file = config.file
-    this._uploadProgress = config.uploadProgress
-    this._sizeLimit = config.sizeLimit
-    this._bucket = new AWS.S3({ params: { Bucket: this._bucketName } })
+    // set aws config
+    AWS.config.update({ accessKeyId, secretAccessKey, region })
+
+    // set public properties
+    this.name = name
+    this.url = url
+    this.error = null
+    this.progress = 0
+
+    // set aws bucket
+    this.bucket = new AWS.S3({ params: { Bucket: name }})
+
     return this
   }
 
   ImageUploader.prototype = {
-    validateFile: function (file) {
-      // Check that file exists
-      if (!file.size) {
-        this._err = { message: 'Missing file argument', code: 'No File' }
+    validate: function ({ size = -1 }) {
+      // check that file exists
+      if (!size || size <= 0) {
+        return { message: 'Invalid or missing file', code: 'Invalid File' }
       }
-      // Check that file size is above 0
-      if (file.size <= 0) {
-        this._err = { message: 'File has size of 0', code: 'Erroneous File' }
-      }
-      // Check that file size is below size limit
-      if (Math.round(parseInt(file.size, 10)) > this._sizeLimit) {
-        this._err = {
+
+      // check that file size is below size limit
+      if (Math.round(parseInt(size, 10)) > sizeLimit) {
+        return {
           code: 'File Too Large',
-          message: 'Attachment too big. Max ' + sizeLabel + ' allowed',
+          message: `Attachment too big. Max ${sizeLabel} allowed`,
         }
       }
-      return this._err
     },
-    clearProgress: function () {
-      this._uploadProgress = 0
+
+    setProgress: function (progress) {
+      this.progress = progress
     },
-    updateProgress: function (progress) {
-      this._uploadProgress = progress
+
+    resetProgress: function () {
+      setTimeout(() => ImageUploader.prototype.setProgress(0), 100)
     },
-    resetUploadProgress: function () {
-      setTimeout(() => {
-        ImageUploader.prototype.clearProgress()
-      }, 100)
-    },
+
     push: function (file) {
-      var self = this
-      if (!this.validateFile(file)) {
-        throw new Error('Missing file.')
+      this.error = this.validate(file);
+      if (this.error) {
+        throw new Error(error)
       }
-      var filename = encodeURI(uniqueString() + '-' + file.name)
-      var params = {
+
+      const { name, type } = file
+      const filename = encodeURI(`${uniqueString()}-${name}`)
+      const params = {
         ACL: 'public-read',
         Body: file,
-        Bucket: this._bucketName,
-        ContentType: file.type,
+        Bucket: this.name,
+        ContentType: type,
         Key: filename,
-        ServerSideEncryption: 'AES256',
+        ServerSideEncryption,
       }
-      this.updateProgress(0)
+
+      this.setProgress(0)
+
       return new Promise((resolve, reject) => {
-        self._bucket
-          .putObject(params, (err, data) => {
-            if (err) {
-              self._err = Object.assign({}, err, { data: data })
-              reject(err)
-            }
-            self.resetUploadProgress()
-            Object.assign(data, data, { filename: filename, url: self._bucketUrl + filename })
-            resolve(data)
-          })
-          .on('httpUploadProgress', (prog) => {
-            self.updateProgress(Math.round((prog.loaded / prog.total) * 100))
-          })
+        this.bucket.putObject(params, (error, data) => {
+          this.setProgress(0)
+
+          if (error) {
+            this.error = error
+            return reject(this.error)
+          }
+
+          const updateData = { filename, url: `${this.url}${filename}` }
+          return resolve({ ...data, ...updateData })
+        })
+        .on('httpUploadProgress', ({ loaded, total }) => {
+          this.setProgress(Math.round((loaded / total) * 100))
+        })
       })
     },
   }
+
   window.ImageUploader = ImageUploader
 })(window.AWS)
