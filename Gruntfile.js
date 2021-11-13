@@ -10,13 +10,15 @@ module.exports = (grunt) => {
       },
       release: {
         files: {
-          'dist/image-uploader.min.js': ['src/image-uploader.js'],
+          'dist/image-uploader.min.js': [
+            'src/image-uploader.js',
+          ],
         },
       },
       bundle: {
         files: {
           'dist/image-uploader.bundle.min.js': [
-            'node_modules/aws-sdk/dist/aws-sdk.js',
+            'bower_components/aws-sdk/dist/aws-sdk.min.js',
             'src/image-uploader.js',
           ],
         },

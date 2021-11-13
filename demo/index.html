@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <title>@sbolel/image-uploader</title>
+  <meta property="og:title" content="@sbolel/image-uploader" />
+  <meta name="author" content="sbolel" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="description" content="JavaScript Image Uploader Library for use with Amazon S3" />
+  <meta property="og:description" content="JavaScript Image Uploader Library for use with Amazon S3" />
+  <link rel="canonical" href="http://sbolel.github.io/image-uploader/" />
+  <meta property="og:url" content="http://sbolel.github.io/image-uploader/" />
+  <meta property="og:site_name" content="@sbolel/image-uploader" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="twitter:title" content="@sbolel/image-uploader" />
+  <script type="application/ld+json">
+    {
+      "description": "JavaScript Image Uploader Library for use with Amazon S3",
+      "url": "http://sbolel.github.io/image-uploader/",
+      "@type": "WebSite",
+      "headline": "@sbolel/image-uploader",
+      "name": "@sbolel/image-uploader",
+      "author": {
+        "@type": "Person",
+        "name": "Sinan Bolel"
+      },
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="./style.css">
+  <script type="text/javascript" src="./image-uploader.bundle.min.js"></script>
+  <script type="text/javascript" src="./index.js"></script>
+</head>
+<body onload="return onLoad();">
+  <header class="site-header">
+    <div class="wrapper">
+      <a class="site-title" rel="author" href="/image-uploader/">@sbolel/image-uploader</a>
+    </div>
+  </header>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+      <div class="home">
+        <form method="post" enctype="multipart/form-data" onsubmit="return onSubmit(event);">
+          <div>
+            <label for="file">Choose images to upload (PNG, JPG, GIF, TIFF)</label>
+            <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" >
+          </div>
+          <div id="preview" class="preview">
+            <p>No files currently selected for upload</p>
+          </div>
+          <div>
+            <button>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer h-card">
+    <data class="u-url" href="/image-uploader/"></data>
+    <div class="wrapper">
+      <div class="footer-col-wrapper">
+        <div class="footer-col">
+          <ul class="contact-list">
+            <li class="p-name">@sbolel</li>
+            <li><a class="u-email" href="1915925+sbolel@users.noreply.github.com">1915925+sbolel@users.noreply.github.com</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p>JavaScript Image Uploader Library for use with Amazon S3</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
