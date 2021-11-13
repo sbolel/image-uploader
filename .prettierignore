@@ -8,9 +8,11 @@
 
 # Build directories
 **/dist
+**/demo
 
 # Node.js
 **/node_modules
+**/bower_components
 
-# Resources directory
-resources/
+# yarn
+.yarn
