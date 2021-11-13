@@ -1,7 +1,10 @@
 **/.DS_Store
+*.log
 .git
 .gitignore
+.yarn
 bower.json
+bower_components/
+demo/
 Gruntfile.js
-node_modules
-npm-debug.log
+node_modules/

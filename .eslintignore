@@ -2,8 +2,13 @@
 **/.cache
 **/.temp
 
-# build directories
+# Build directories
 **/dist
+**/demo
 
-# node.js
+# Node.js
 **/node_modules
+**/bower_components
+
+# yarn
+.yarn
