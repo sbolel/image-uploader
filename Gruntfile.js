@@ -6,24 +6,22 @@ module.exports = (grunt) => {
 
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
       },
       release: {
         files: {
-          'dist/image-uploader.min.js': [
-            'src/image-uploader.js'
-          ]
-        }
+          'dist/image-uploader.min.js': ['src/image-uploader.js'],
+        },
       },
       bundle: {
         files: {
           'dist/image-uploader.bundle.min.js': [
             'node_modules/aws-sdk/dist/aws-sdk.js',
-            'src/image-uploader.js'
-          ]
-        }
-      }
-    }
+            'src/image-uploader.js',
+          ],
+        },
+      },
+    },
   })
 
   grunt.loadNpmTasks('grunt-contrib-uglify')

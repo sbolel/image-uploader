@@ -18,17 +18,17 @@
 
 An open source plugin for uploading image files to an S3 bucket.
 
-* **Demo**: https://ionimg.firebaseapp.com/
-* Repository: https://github.com/sbolel/image-uploader
+- **Demo**: https://ionimg.firebaseapp.com/
+- Repository: https://github.com/sbolel/image-uploader
 
 ## Getting Started
 
 Install `image-uploader` via npm:
-    
+
     npm install --save image-uploader
 
 Or via Bower:
-    
+
     bower install --save s3-image-uploader
 
 Include image-upload.bundle.min.js in your app:
@@ -58,27 +58,27 @@ To use your own Amazon S3 bucket, change the information in `src/image-upload.js
 
 To setup an S3 bucket for use with the Ionic Image Upload plugin, we need to:
 
-* Configure an AWS S3 bucket by creating a "public" IAM account:
-    - The IAM user will only have permission to PUT files into a particular AWS Bucket and nothing else.
-    - This users API key will be public -- anyone will be able to upload to your bucket if they use this key.
-* Configure the bucket to expire all objects within 24 hours.
-    - Even if someone uploads a 10 Gigabyte file, it will eventually be deleted.
-* Configure CORS to prevent uploading of content from anywhere other than your own domain.
-* Create a server to transfer uploaded files from the temporary bucket to a permanent bucket:
-    - When a new file is uploaded to this temporary bucket from the app;
-    - App will send the details of the file to the server;
-    - Server will perform any necessary transformations, encryption, resizing, or processing, and,
-    - Server will move the file into a permanent bucket.
+- Configure an AWS S3 bucket by creating a "public" IAM account:
+  - The IAM user will only have permission to PUT files into a particular AWS Bucket and nothing else.
+  - This users API key will be public -- anyone will be able to upload to your bucket if they use this key.
+- Configure the bucket to expire all objects within 24 hours.
+  - Even if someone uploads a 10 Gigabyte file, it will eventually be deleted.
+- Configure CORS to prevent uploading of content from anywhere other than your own domain.
+- Create a server to transfer uploaded files from the temporary bucket to a permanent bucket:
+  - When a new file is uploaded to this temporary bucket from the app;
+  - App will send the details of the file to the server;
+  - Server will perform any necessary transformations, encryption, resizing, or processing, and,
+  - Server will move the file into a permanent bucket.
 
 #### 1. Create the IAM User
 
-1. Open AWS console to the "Security Credentials" section. 
-2. Create a new user and call it something like "app_public". 
+1. Open AWS console to the "Security Credentials" section.
+2. Create a new user and call it something like "app_public".
 3. Make sure you download the key information when it is presented, this is what we’ll be feeding into our app later to upload with.
 4. Under the permissions section, click "attach a new policy", then select the policy generator.
 5. Select Amazon S3 as the service and only select the `PutObject` action from the drop down list.
 6. The ARN is an Amazon Resource Name. This will look like `arn:aws:s3:::your_bucket_name`
-7. Click "add statement", then save and apply policy. 
+7. Click "add statement", then save and apply policy.
 
 Now your user has write-only access to the bucket.
 

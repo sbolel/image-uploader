@@ -1,7 +1,7 @@
-(function (AWS) {
+;(function (AWS) {
   'use strict'
-  var sizeLimit = 10485760   // 10MB in Bytes
-  var sizeLabel = Math.round(sizeLimit / 1024 / 1024) + 'MB'   // Bytes To MB string
+  var sizeLimit = 10485760 // 10MB in Bytes
+  var sizeLabel = Math.round(sizeLimit / 1024 / 1024) + 'MB' // Bytes To MB string
 
   // Generate a unique string
   var uniqueString = function () {
@@ -22,16 +22,16 @@
     region: 'us-east-1',
     secretAccessKey: 'gCF19auerZBOx9IvpPpKAlCJYbD0yUo+bLyNB+wA',
     sizeLimit: sizeLimit,
-    uploadProgress: 0
+    uploadProgress: 0,
   }
 
   // ImageUploader class
-  function ImageUploader (inputConfig) {
+  function ImageUploader(inputConfig) {
     var config = Object.assign({}, defaultConfig, inputConfig)
     AWS.config.update({
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,
-      region: config.region
+      region: config.region,
     })
     this._err = {}
     this._accessKeyId = config.accessKeyId
@@ -58,7 +58,10 @@
       }
       // Check that file size is below size limit
       if (Math.round(parseInt(file.size, 10)) > this._sizeLimit) {
-        this._err = { code: 'File Too Large', message: 'Attachment too big. Max ' + sizeLabel + ' allowed' }
+        this._err = {
+          code: 'File Too Large',
+          message: 'Attachment too big. Max ' + sizeLabel + ' allowed',
+        }
       }
       return this._err
     },
@@ -69,7 +72,7 @@
       this._uploadProgress = progress
     },
     resetUploadProgress: function () {
-      setTimeout(function () {
+      setTimeout(() => {
         ImageUploader.prototype.clearProgress()
       }, 100)
     },
@@ -85,23 +88,25 @@
         Bucket: this._bucketName,
         ContentType: file.type,
         Key: filename,
-        ServerSideEncryption: 'AES256'
+        ServerSideEncryption: 'AES256',
       }
       this.updateProgress(0)
-      return new Promise(function (resolve, reject) {
-        self._bucket.putObject(params, function (err, data) {
-          if (err) {
-            self._err = Object.assign({}, err, { data: data })
-            reject(err)
-          }
-          self.resetUploadProgress()
-          Object.assign(data, data, { filename: filename, url: self._bucketUrl + filename })
-          resolve(data)
-        }).on('httpUploadProgress', function (prog) {
-          self.updateProgress(Math.round(prog.loaded / prog.total * 100))
-        })
+      return new Promise((resolve, reject) => {
+        self._bucket
+          .putObject(params, (err, data) => {
+            if (err) {
+              self._err = Object.assign({}, err, { data: data })
+              reject(err)
+            }
+            self.resetUploadProgress()
+            Object.assign(data, data, { filename: filename, url: self._bucketUrl + filename })
+            resolve(data)
+          })
+          .on('httpUploadProgress', (prog) => {
+            self.updateProgress(Math.round((prog.loaded / prog.total) * 100))
+          })
       })
-    }
+    },
   }
   window.ImageUploader = ImageUploader
 })(window.AWS)

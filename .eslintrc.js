@@ -3,11 +3,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: [
-    'plugin:jsdoc/recommended',
-    'plugin:prettier/recommended',
-    'prettier',
-  ],
+  extends: ['plugin:jsdoc/recommended', 'plugin:prettier/recommended', 'prettier'],
   rules: {
     'jsdoc/newline-after-description': 'off',
     'jsdoc/require-jsdoc': ['warn', { publicOnly: true }],
@@ -44,10 +40,7 @@ module.exports = {
     parser: 'babel-eslint',
     sourceType: 'module',
   },
-  plugins: [
-    'jsdoc',
-    'prettier',
-  ],
+  plugins: ['jsdoc', 'prettier'],
   settings: {
     jsdoc: {
       tagNamePreference: {
