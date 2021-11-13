@@ -1,6 +1,6 @@
 {
   "name": "image-uploader",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "src/image-uploader.js",
   "description": "JavaScript Image Uploader Library for use with Amazon S3",
   "author": "Sinan Bolel <sinanbolel@gmail.com> (https://sinanbolel.com)",
@@ -51,7 +51,6 @@
     "grunt-contrib-uglify": "~5.0.1",
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.1",
-    "standard": "~16.0.4",
     "yarn-run-all": "^3.1.1"
   }
 }

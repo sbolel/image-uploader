@@ -2,9 +2,7 @@
 
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
-[![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
-[![js-standard][standard-image]][standard-url]
 
 [npm-image]: https://img.shields.io/npm/v/image-uploader.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/image-uploader
