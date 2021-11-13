@@ -23,13 +23,17 @@ An open source plugin for uploading image files to an S3 bucket.
 
 ## Getting Started
 
-Install `image-uploader` via npm:
+Install `image-uploader` via yarn:
+
+    yarn add image-uploader
+
+Or via npm:
 
     npm install --save image-uploader
 
 Or via Bower:
 
-    bower install --save s3-image-uploader
+    bower install --save sbolel/s3-image-uploader
 
 Include image-upload.bundle.min.js in your app:
 
@@ -39,12 +43,15 @@ Or with the Amazon SDK included:
 
     <script src="lib/image-upload.bundle.min.js"></script>
 
-#### Upload an image
+## Usage
 
-    const imageUploader = new ImageUploader();
-    imageUploader.push(file, (data) => {
-      console.log('File uploaded Successfully', file, data);
-    });
+```js
+const imageUploader = new ImageUploader();
+
+imageUploader.push(file, (data) => {
+  console.log('File uploaded Successfully', file, data);
+});
+```
 
 ## Configuring AWS S3
 
@@ -52,23 +59,23 @@ You are welcome to use the public S3 bucket that is preconfigured in `src/image-
 
 To use your own Amazon S3 bucket, change the information in `src/image-upload.js` and uglify by running `grunt` in Terminal from the project directory.
 
-#### Setting up an AWS S3 Bucket for use with Ionic Image Upload
+### Setting up an AWS S3 Bucket for use with Ionic Image Upload
 
 <small>Below is a summary of [Uploading To S3 With AngularJS](http://www.cheynewallace.com/uploading-to-s3-with-angularjs/) by [Cheyne Wallace](http://www.cheynewallace.com/)</small>
 
 To setup an S3 bucket for use with the Ionic Image Upload plugin, we need to:
 
 - Configure an AWS S3 bucket by creating a "public" IAM account:
-  - The IAM user will only have permission to PUT files into a particular AWS Bucket and nothing else.
-  - This users API key will be public -- anyone will be able to upload to your bucket if they use this key.
+    - The IAM user will only have permission to PUT files into a particular AWS Bucket and nothing else.
+    - This users API key will be public -- anyone will be able to upload to your bucket if they use this key.
 - Configure the bucket to expire all objects within 24 hours.
-  - Even if someone uploads a 10 Gigabyte file, it will eventually be deleted.
+    - Even if someone uploads a 10 Gigabyte file, it will eventually be deleted.
 - Configure CORS to prevent uploading of content from anywhere other than your own domain.
 - Create a server to transfer uploaded files from the temporary bucket to a permanent bucket:
-  - When a new file is uploaded to this temporary bucket from the app;
-  - App will send the details of the file to the server;
-  - Server will perform any necessary transformations, encryption, resizing, or processing, and,
-  - Server will move the file into a permanent bucket.
+    - When a new file is uploaded to this temporary bucket from the app;
+    - App will send the details of the file to the server;
+    - Server will perform any necessary transformations, encryption, resizing, or processing, and,
+    - Server will move the file into a permanent bucket.
 
 #### 1. Create the IAM User
 
